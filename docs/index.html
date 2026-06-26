@@ -58,14 +58,17 @@
         var container = document.querySelector("#unity-container");
         var width = Math.max(1, Math.floor(container.clientWidth));
         var height = Math.max(1, Math.floor(container.clientHeight));
+        var pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        var renderWidth = Math.max(1, Math.floor(width * pixelRatio));
+        var renderHeight = Math.max(1, Math.floor(height * pixelRatio));
 
         canvas.style.width = width + "px";
         canvas.style.height = height + "px";
-        canvas.width = width;
-        canvas.height = height;
+        canvas.width = renderWidth;
+        canvas.height = renderHeight;
 
         if (unityInstance && unityInstance.Module && unityInstance.Module.setCanvasSize) {
-          unityInstance.Module.setCanvasSize(width, height);
+          unityInstance.Module.setCanvasSize(renderWidth, renderHeight);
         }
       }
 
